@@ -49,8 +49,8 @@ export default function Add() {
         });
     };
 
-    const add = async (e) => {
-        e.preventDefault()
+    const add = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
         console.log(title, file, tag, text);
         const uid = auth.currentUser?.uid;
         if (!uid) {

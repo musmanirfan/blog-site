@@ -6,3 +6,13 @@ export type addType = {
     slug: string;
     createdDate: Date;
 }
+
+export type CardData = {
+    firebaseID?: string;
+    imageURL?: string;
+    title?: string;
+    mark?: string;
+    tag?: string;
+    slug?: string;
+    text?: string;
+  };
