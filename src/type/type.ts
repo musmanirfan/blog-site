@@ -3,5 +3,6 @@ export type addType = {
     file: File | null | undefined;
     tag: string;
     text: string;
+    slug: string;
     createdDate: Date;
 }
