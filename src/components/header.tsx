@@ -33,11 +33,13 @@ export default function Header() {
                     <button onClick={() => { route.push("/add") }} className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
                         Add Blog
                     </button>
-                    <button onClick={logoutFunc} className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">
-                        Logout
+                    <button onClick={() => { if (!auth.currentUser) { logoutFunc(); } else { route.push("/signup") } }}
+                        className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
+                    >
+                        {!auth.currentUser ? "logout" : "signUp"}
                     </button>
                 </div>
             </div>
-        </header>
+        </header >
     )
 }
