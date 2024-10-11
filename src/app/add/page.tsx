@@ -9,6 +9,7 @@ import { makeName } from '../additionalfunction/makeName';
 import { metadata } from '../additionalfunction/metaData';
 import { makeSlug } from '../additionalfunction/makeSlug';
 import { useRouter } from 'next/navigation';
+import ReactMarkdown from 'react-markdown';
 
 export default function Add() {
     const [title, setTitle] = useState("");
@@ -128,6 +129,16 @@ export default function Add() {
                 >
                     Add
                 </button>
+                <div className="bg-white w-[90%] shadow-lg rounded-lg p-4 flex flex-col justify-between md:w-2/5 border border-gray-200 text-black max-h-[100%] overflow-y-scroll">
+                    <label htmlFor="tag" className="block text-sm font-bold mb-2">
+                        <span className="text-neutral">Text Output:</span>
+                    </label>
+                    <div className="p-2 h-full">
+                        <ReactMarkdown className="w-full rounded-lg prose">
+                            {text}
+                        </ReactMarkdown>
+                    </div>
+                </div>
             </form>
         </div>
     )
