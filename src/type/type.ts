@@ -1,3 +1,13 @@
+import { Timestamp } from "firebase/firestore";
+
+export type User = {
+    displayName?: string;
+    email?: string;
+    password?: string
+    uid?: string
+}
+
+
 export type addType = {
     title: string;
     file: File | null | undefined;
@@ -15,4 +25,14 @@ export type CardData = {
     tag?: string;
     slug?: string;
     text?: string;
-  };
+};
+
+export interface BlogData {
+    imageUrl: string;
+    title: string;
+    slug: string;
+    createdDate: Timestamp;
+    text: string;
+    tag: string;
+    // Add other fields as necessary
+}

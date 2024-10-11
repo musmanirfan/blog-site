@@ -36,7 +36,7 @@ export default function ShowBlogs() {
                             />
                         </div>
                         <div className="p-6">
-                            <div className="text-teal-600 text-sm font-medium mb-2">
+                            <div className="text-teal-600 text-sm font-medium mb-2 border w-fit px-4 py-1 rounded-full border-teal-600">
                                 {tag}
                             </div>
                             <h2 className="text-2xl font-bold mb-4">
