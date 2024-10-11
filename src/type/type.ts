@@ -1,5 +1,11 @@
 import { Timestamp } from "firebase/firestore";
 
+export type signupType = {
+    signup?: boolean,
+    func?: (userName: string, email: string, password: string) => void
+    loginFunc?: (email: string, password: string) => void
+}
+
 export type User = {
     displayName?: string;
     email?: string;
