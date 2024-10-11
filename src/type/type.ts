@@ -9,7 +9,7 @@ export type addType = {
 
 export type CardData = {
     firebaseID?: string;
-    imageURL?: string;
+    imageUrl?: string;
     title?: string;
     mark?: string;
     tag?: string;
