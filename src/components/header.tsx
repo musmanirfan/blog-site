@@ -1,18 +1,19 @@
 "use client"
 import { useRouter } from 'next/navigation'
-import React from 'react'
+import React, { useState } from 'react'
 import { signOut } from "firebase/auth";
 import { auth } from '@/firebase/firebseConfig';
 import { toast } from 'react-toastify';
 
 export default function Header() {
+    const [reload, setReload] = useState(false)
     const route = useRouter()
     const logoutFunc = () => {
         console.log("logout1");
         signOut(auth).then(() => {
             toast.success("LogOut Successfully")
+            setReload(true);
             console.log("logout");
-
         }).catch((error) => {
             console.log(error);
 
@@ -30,14 +31,27 @@ export default function Header() {
 
                 {/* <!-- Add Blog and Logout Buttons --> */}
                 <div className="flex space-x-4">
-                    <button onClick={() => { route.push("/add") }} className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
-                        Add Blog
-                    </button>
-                    <button onClick={() => { if (!auth.currentUser) { logoutFunc(); } else { route.push("/signup") } }}
-                        className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
-                    >
-                        {!auth.currentUser ? "logout" : "signUp"}
-                    </button>
+                    {auth.currentUser && (
+                        <button onClick={() => { route.push("/add") }} className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
+                            Add Blog
+                        </button>
+                    )
+                    }
+                    {
+                        auth.currentUser ? (
+                            <button onClick={logoutFunc}
+                                className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
+                            >
+                                logout
+                            </button>
+                        ) : (
+                            <button onClick={() => { route.push("/signup") }}
+                                className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
+                            >
+                                signUp
+                            </button>
+                        )
+                    }
                 </div>
             </div>
         </header >
