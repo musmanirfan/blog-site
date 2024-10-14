@@ -55,9 +55,12 @@ export default function page() {
     }
 
 
-    return (<>
-        <div><Auth signup={true} func={signup} /></div>
-        <button onClick={handleGoogleSignup}>SignIn with Google</button>
-    </>
+    return (
+        <div className='flex flex-col'>
+            <div><Auth signup={true} func={signup} /></div>
+            <button
+                className="w-[400px] !mx-auto bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-4 rounded-lg transition-all duration-300 mt-4"
+                onClick={handleGoogleSignup}>SignUp with Google</button>
+        </div>
     )
 }

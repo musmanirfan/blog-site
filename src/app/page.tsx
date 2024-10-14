@@ -9,7 +9,7 @@ export default function Home() {
   
   return (
     <div>
-      <Header/*  setReload={setReload} *//>
+      <Header/>
       <ShowBlogs />
     </div>
   );

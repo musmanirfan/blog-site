@@ -1,6 +1,7 @@
 "use client"
 
 import { formatDate } from '@/app/additionalfunction/formatDate';
+import Header from '@/components/header';
 import { db } from '@/firebase/firebseConfig';
 import { BlogData } from '@/type/type';
 import { CircularProgress } from '@mui/material';
@@ -30,6 +31,7 @@ export default function Page({ params }: { params: { slug: string } }) {
     }, [params.slug])
     return (
         <>
+            <Header />
             <div className='flex w-[100%] justify-center mx-auto'>
                 {
                     data ? (
