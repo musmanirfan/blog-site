@@ -2,7 +2,7 @@
 
 import { auth, db, storage } from '@/firebase/firebseConfig';
 import { addDoc, collection, doc, updateDoc } from 'firebase/firestore';
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { toast } from 'react-toastify';
 import { makeName } from '../additionalfunction/makeName';
@@ -10,12 +10,13 @@ import { metadata } from '../additionalfunction/metaData';
 import { makeSlug } from '../additionalfunction/makeSlug';
 import { useRouter } from 'next/navigation';
 import ReactMarkdown from 'react-markdown';
+import Header from '@/components/header';
 
 export default function Add() {
     const [title, setTitle] = useState("");
     const [file, setFile] = useState<null | File>(null);
     const [tag, setTag] = useState("");
-    const [text, setText] = useState("")
+    const [text, setText] = useState("");
     const route = useRouter()
 
     const uploadImg = (): Promise<string> => {
@@ -80,68 +81,71 @@ export default function Add() {
 
 
     return (
-        <div className="max-w-lg mx-auto my-10 p-6 bg-[#EBEBEB] rounded-md shadow-lg">
-            <h2 className="text-2xl font-semibold text-center text-gray-700 mb-6">Add a New Blog Post</h2>
-            <form onSubmit={add}>
-                <div className="mb-4">
-                    <label htmlFor="title" className="block text-gray-700 font-medium mb-2">Title:</label>
-                    <input
-                        type="text"
-                        id="title"
-                        value={title}
-                        onChange={e => setTitle(e.target.value)}
-                        className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                </div>
-                <div className="mb-4">
-                    <label htmlFor="file" className="block text-gray-700 font-medium mb-2">File:</label>
-                    <input
-                        type="file"
-                        id="file"
-                        onChange={e => setFile(e.target.files?.[0] ?? null)}
-                        className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                </div>
-                <div className="mb-4">
-                    <label htmlFor="tag" className="block text-gray-700 font-medium mb-2">Tag:</label>
-                    <select
-                        id="tag"
-                        value={tag}
-                        onChange={e => setTag(e.target.value)}
-                        className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    >
-                        <option value="Entertainment">Entertainment</option>
-                        <option value="Education">Education</option>
-                        <option value="Coding">Coding</option>
-                        <option value="Blogging">Blogging</option>
-                    </select>
-                </div>
-                <div className="mb-6">
-                    <label htmlFor="text" className="block text-gray-700 font-medium mb-2">Text:</label>
-                    <textarea
-                        id="text"
-                        value={text}
-                        onChange={e => setText(e.target.value)}
-                        className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 h-32 resize-none"
-                    ></textarea>
-                </div>
-                <button
-                    type="submit"
-                    className="w-full bg-blue-500 text-white py-2 rounded-md font-semibold hover:bg-blue-600 transition duration-200"
-                >
-                    Add
-                </button>
-                <div className="bg-white w-[90%] shadow-lg rounded-lg p-4 flex flex-col justify-between md:w-2/5 border border-gray-200 text-black max-h-[100%] overflow-y-scroll">
-                    <label htmlFor="tag" className="block text-sm font-bold mb-2">
-                        <span className="text-neutral">Text Output:</span>
-                    </label>
-                    <div className="p-2 h-full">
-                        <ReactMarkdown className="w-full rounded-lg prose">
-                            {text}
-                        </ReactMarkdown>
+        <>
+            <Header />
+            <div className="max-w-lg mx-auto my-10 p-6 bg-[#EBEBEB] rounded-md shadow-lg">
+                <h2 className="text-2xl font-semibold text-center text-gray-700 mb-6">Add a New Blog Post</h2>
+                <form onSubmit={add}>
+                    <div className="mb-4">
+                        <label htmlFor="title" className="block text-gray-700 font-medium mb-2">Title:</label>
+                        <input
+                            type="text"
+                            id="title"
+                            value={title}
+                            onChange={e => setTitle(e.target.value)}
+                            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
                     </div>
-                </div>
-            </form>
-        </div>
+                    <div className="mb-4">
+                        <label htmlFor="file" className="block text-gray-700 font-medium mb-2">File:</label>
+                        <input
+                            type="file"
+                            id="file"
+                            onChange={e => setFile(e.target.files?.[0] ?? null)}
+                            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <label htmlFor="tag" className="block text-gray-700 font-medium mb-2">Tag:</label>
+                        <select
+                            id="tag"
+                            value={tag}
+                            onChange={e => setTag(e.target.value)}
+                            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        >
+                            <option value="Entertainment">Entertainment</option>
+                            <option value="Education">Education</option>
+                            <option value="Coding">Coding</option>
+                            <option value="Blogging">Blogging</option>
+                        </select>
+                    </div>
+                    <div className="mb-6">
+                        <label htmlFor="text" className="block text-gray-700 font-medium mb-2">Text:</label>
+                        <textarea
+                            id="text"
+                            value={text}
+                            onChange={e => setText(e.target.value)}
+                            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 h-32 resize-none"
+                        ></textarea>
+                    </div>
+                    <button
+                        type="submit"
+                        className="w-full bg-blue-500 text-white py-2 rounded-md font-semibold hover:bg-blue-600 transition duration-200"
+                    >
+                        Add
+                    </button>
+                    <div className="bg-white shadow-lg rounded-lg p-4 flex flex-col justify-between md:w-full border border-gray-200 text-black max-h-[100%] mt-3 overflow-y-scroll">
+                        <label htmlFor="tag" className="block text-sm font-bold mb-2">
+                            <span className="text-neutral">Text Output:</span>
+                        </label>
+                        <div className="p-2 h-full ">
+                            <ReactMarkdown className="rounded-lg prose">
+                                {text}
+                            </ReactMarkdown>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </>
     )
 }

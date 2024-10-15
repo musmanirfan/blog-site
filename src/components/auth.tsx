@@ -7,6 +7,7 @@ import { useState } from 'react'
 
 
 export default function Auth({ signup, func, loginFunc }: signupType) {
+    
 
     const [userName, setUserName] = useState("")
     const [email, setEmail] = useState("")

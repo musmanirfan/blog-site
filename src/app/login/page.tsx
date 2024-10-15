@@ -1,14 +1,30 @@
 "use client"
 
 import Auth from '@/components/auth'
-import { auth } from '@/firebase/firebseConfig'
-import { signInWithEmailAndPassword } from 'firebase/auth'
+import { auth, provider } from '@/firebase/firebseConfig'
+import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 import { toast } from 'react-toastify'
 
 export default function Page() {
     const route = useRouter();
+
+    const handleGoogleSignup = async () => {
+        try {
+            const res = await signInWithPopup(auth, provider)
+            // const userData = res.user;
+            // const userName = userData.displayName || "anonymus";
+            // const email = userData.email;
+            // const uid = userData.uid;
+
+            route.push("/")
+            console.log(res);
+        } catch (error) {
+            console.log(error);
+
+        }
+    }
     const login = async (email: string, password: string) => {
         try {
             console.log(email, password);
@@ -27,6 +43,11 @@ export default function Page() {
         }
     }
     return (
-        <div><Auth loginFunc={login} /></div>
+        <div className='flex flex-col'>
+            <div><Auth loginFunc={login} /></div>
+            <button
+                className="w-[400px] !mx-auto bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-4 rounded-lg transition-all duration-300 mt-4"
+                onClick={handleGoogleSignup}>Sign In with Google</button>
+        </div>
     )
 }
