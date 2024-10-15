@@ -5,7 +5,7 @@ import Header from '@/components/header';
 import { db } from '@/firebase/firebseConfig';
 import { BlogData } from '@/type/type';
 import { CircularProgress } from '@mui/material';
-import { collection, DocumentData, getDocs, query, where } from 'firebase/firestore';
+import { collection, getDocs, query, where } from 'firebase/firestore';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react'
 import ReactMarkdown from 'react-markdown';

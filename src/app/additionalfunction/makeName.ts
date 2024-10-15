@@ -1,7 +1,7 @@
 export const makeName = (fileName: string): string => {
-    let fileNameArr = fileName.split(".");
-    let lastIndex = fileNameArr.length - 1;
-    let fileExtension = fileNameArr[lastIndex];
-    let newName = `${crypto.randomUUID()}.${fileExtension}`;
+    const fileNameArr = fileName.split(".");
+    const lastIndex = fileNameArr.length - 1;
+    const fileExtension = fileNameArr[lastIndex];
+    const newName = `${crypto.randomUUID()}.${fileExtension}`;
     return newName;
 };

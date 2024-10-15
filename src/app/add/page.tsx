@@ -22,13 +22,15 @@ export default function Add() {
         return new Promise((resolve, reject) => {
             if (!file) return reject("No file to upload");
             console.log(file);
-            let newName = makeName(file.name);
+            const newName = makeName(file.name);
             const storageRef = ref(storage, `images/${newName}`);
             const uploadTask = uploadBytesResumable(storageRef, file, metadata);
             uploadTask.on(
                 'state_changed',
                 (snapshot) => {
                     const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    return progress;
+
                 },
                 (error) => {
                     reject(error);

@@ -10,7 +10,6 @@ import Markdown from 'react-markdown';
 
 export default function ShowBlogs() {
     const [allCards, setAllCards] = useState<CardData[]>([])
-    const [imageURL, setImageURL] = useState<string | null>(null);
     useEffect(() => {
         async function getData() {
             const querySnapshot = await getDocs(collection(db, "blogs"));

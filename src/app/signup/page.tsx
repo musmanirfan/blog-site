@@ -9,12 +9,12 @@ import { doc, setDoc } from 'firebase/firestore'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 
-export default function page() {
+export default function Page() {
     const route = useRouter()
 
     const saveUserInFirestore = async (displayName: string, email: string, uid: string) => {
-        let user = { displayName, email, uid }
-        let docRef = doc(db, "users", uid)
+        const user = { displayName, email, uid }
+        const docRef = doc(db, "users", uid)
         await setDoc(docRef, user)
     }
 
@@ -26,7 +26,7 @@ export default function page() {
             const email = userData.email;
             const uid = userData.uid;
 
-            await saveUserInFirestore(userName, email!, userData.uid);
+            await saveUserInFirestore(userName, email!, uid);
             route.push("/")
             console.log(res);
         } catch (error) {

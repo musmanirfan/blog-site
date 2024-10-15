@@ -6,8 +6,10 @@ import { auth } from '@/firebase/firebseConfig';
 import { toast } from 'react-toastify';
 
 export default function Header() {
-    const [reload, setReload] = useState(false)
-    const route = useRouter()
+    const [reload, setReload] = useState(false);
+    const route = useRouter();
+    
+
     const logoutFunc = () => {
         console.log("logout1");
         signOut(auth).then(() => {
@@ -16,7 +18,7 @@ export default function Header() {
             console.log("logout");
         }).catch((error) => {
             console.log(error);
-
+            console.log(reload);
         });
 
     }

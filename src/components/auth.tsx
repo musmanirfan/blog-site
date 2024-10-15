@@ -1,9 +1,8 @@
 "use client"
 
 import { signupType } from '@/type/type'
-import { MenuItem, /* Select, */ TextField } from '@mui/material'
 import Link from 'next/link'
-import { FormEvent, useState } from 'react'
+import { useState } from 'react'
 
 
 
@@ -66,7 +65,7 @@ export default function Auth({ signup, func, loginFunc }: signupType) {
                     {signup ? (
                         <button
                             onClick={() => {
-                                func && func(userName, email, password);
+                                if (func) func(userName, email, password);
                             }}
                             className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all duration-300"
                         >
@@ -75,7 +74,7 @@ export default function Auth({ signup, func, loginFunc }: signupType) {
                     ) : (
                         <button
                             onClick={() => {
-                                loginFunc && loginFunc(email, password);
+                                if (loginFunc) loginFunc(email, password);
                             }}
                             className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-green-400 transition-all duration-300"
                         >
