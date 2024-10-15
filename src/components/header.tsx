@@ -16,11 +16,11 @@ export default function Header() {
             toast.success("LogOut Successfully")
             setReload(true);
             console.log("logout");
+            route.push("/");
         }).catch((error) => {
             console.log(error);
             console.log(reload);
         });
-
     }
 
 
