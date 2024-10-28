@@ -30,7 +30,7 @@ export default function ShowBlogsToAdmin() {
             const blogRef = doc(db, "blogs", firebseID);
             await deleteDoc(blogRef);
             console.log("Blog deleted successfully.");
-            toast.success("Expense Delete Successfully", {
+            toast.success("Blog Delete Successfully", {
             });
         } catch (error) {
             console.log("Error deleting expense:", error);
