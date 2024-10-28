@@ -1,14 +1,24 @@
 "use client"
-import { useRouter } from 'next/navigation'
-import React, { useState } from 'react'
-import { signOut } from "firebase/auth";
+import { useRouter, usePathname } from 'next/navigation'
+import React, { useEffect, useState } from 'react'
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from '@/firebase/firebseConfig';
 import { toast } from 'react-toastify';
+import { User } from '@/type/type';
 
 export default function Header() {
     const [reload, setReload] = useState(false);
+    const [user, setUser] = useState<User | null>(null)
     const route = useRouter();
-    
+    const path = usePathname();
+
+    useEffect(()=>{
+        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+            setUser(currentUser as User)
+        })
+        return () => unsubscribe();
+    },[])
+
 
     const logoutFunc = () => {
         console.log("logout1");
@@ -16,7 +26,11 @@ export default function Header() {
             toast.success("LogOut Successfully")
             setReload(true);
             console.log("logout");
-            route.push("/");
+            if (path === "/add") {
+                route.push("/");
+            } else {
+                route.push(path)
+            }
         }).catch((error) => {
             console.log(error);
             console.log(reload);
@@ -33,24 +47,24 @@ export default function Header() {
 
                 {/* <!-- Add Blog and Logout Buttons --> */}
                 <div className="flex space-x-4">
-                    {auth.currentUser && (
+                    {user && (
                         <button onClick={() => { route.push("/add") }} className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
                             Add Blog
                         </button>
                     )
                     }
                     {
-                        auth.currentUser ? (
+                        user ? (
                             <button onClick={logoutFunc}
                                 className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
                             >
-                                logout
+                                logOut
                             </button>
                         ) : (
                             <button onClick={() => { route.push("/signup") }}
                                 className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
                             >
-                                signUp
+                                sign Up
                             </button>
                         )
                     }

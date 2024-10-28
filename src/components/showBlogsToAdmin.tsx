@@ -2,14 +2,16 @@
 
 import { db } from '@/firebase/firebseConfig';
 import { CardData } from '@/type/type';
+import { Delete, Edit } from '@mui/icons-material';
 import { CircularProgress } from '@mui/material';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, deleteDoc, doc, getDocs } from 'firebase/firestore';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 import Markdown from 'react-markdown';
+import { toast } from 'react-toastify';
 
-export default function ShowBlogs() {
+export default function ShowBlogsToAdmin() {
     const [allCards, setAllCards] = useState<CardData[]>([])
     useEffect(() => {
         async function getData() {
@@ -22,6 +24,21 @@ export default function ShowBlogs() {
         }
         getData();
     }, []);
+
+    const handleDeleteBlog = async (firebseID: string) => {
+        try {
+            const blogRef = doc(db, "blogs", firebseID);
+            await deleteDoc(blogRef);
+            console.log("Blog deleted successfully.");
+            toast.success("Expense Delete Successfully", {
+            });
+        } catch (error) {
+            console.log("Error deleting expense:", error);
+        }
+    };
+
+
+
     return (
         allCards.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-6">
@@ -37,21 +54,35 @@ export default function ShowBlogs() {
                                 unoptimized
                             />
                         </div>
-                        <div className="p-6 relative h-[300px]">
+                        <div className="p-6 h-[300px] relative">
                             <div className="text-teal-600 text-sm font-medium mb-2 border w-fit px-4 py-1 rounded-full border-teal-600">
                                 {tag}
                             </div>
                             <h2 className="text-2xl font-bold mb-4">
                                 {title}
                             </h2>
+                            {/* <h2 className="text-2xl font-bold mb-4">
+                                {firebaseID}
+                            </h2> */}
                             <div className="text-gray-700">
                                 <Markdown>
                                     {text!.length > 150 ? `${text!.substring(0, 150)}...` : text}
                                 </Markdown>
                             </div>
-                            <Link href={`/blog/${slug}`} className="inline-block mt-4 text-teal-600 hover:underline font-semibold  absolute bottom-4 left-4">
-                                Read More
-                            </Link>
+                            <div className='flex justify-between items-center absolute bottom-4 left-4 right-4'>
+                                <Link href={`/blog/${slug}`} className="inline-block mt-4 text-teal-600 hover:underline font-semibold">
+                                    Read More
+                                </Link>
+                                <div className='flex'>
+                                    <Link href={`admin/edit/${firebaseID}`}>
+                                        <Edit className='cursor-pointer' />
+                                    </Link>
+                                    <div className='cursor-pointer' onClick={() => { handleDeleteBlog(firebaseID as string) }}>
+                                        <Delete />
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
                 ))}
@@ -59,7 +90,6 @@ export default function ShowBlogs() {
         ) : (
             <div className="flex justify-center items-center h-[100vh]">
                 <CircularProgress color='success' />
-
             </div>
         )
     )
