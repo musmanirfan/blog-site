@@ -4,25 +4,50 @@ import { db } from '@/firebase/firebseConfig';
 import { CardData } from '@/type/type';
 import { Delete, Edit } from '@mui/icons-material';
 import { CircularProgress } from '@mui/material';
-import { collection, deleteDoc, doc, getDocs } from 'firebase/firestore';
+import { collection, deleteDoc, doc, getDocs, onSnapshot, query } from 'firebase/firestore';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
 import Markdown from 'react-markdown';
 import { toast } from 'react-toastify';
 
 export default function ShowBlogsToAdmin() {
     const [allCards, setAllCards] = useState<CardData[]>([])
+    /*     const [loading, setLoading] = useState(false);
+        const router = useRouter(); */
+
+
     useEffect(() => {
-        async function getData() {
-            const querySnapshot = await getDocs(collection(db, "blogs"));
-            const dataArray: CardData[] = [];
-            querySnapshot.forEach((doc) => {
-                dataArray.push(doc.data() as CardData);
+        const q = query(collection(db, "blogs"));
+
+        const unsubscribe = onSnapshot(q, (snapshot) => {
+            snapshot.docChanges().forEach((change) => {
+                const docData = {
+                    id: change.doc.data(), ...change.doc.data()
+                } as CardData;
+                if (change.type === "added") {
+                    setAllCards((prevCards) => [...prevCards, docData]);
+                }
+                if (change.type === "modified") {
+                    console.log("Modified document: ", docData);
+                    setAllCards((prevCards) =>
+                        prevCards.map((card) =>
+                            card.firebaseID === docData.firebaseID ? docData : card
+                        )
+                    );
+                }
+                if (change.type === "removed") {
+                    console.log("Removed document: ", docData);
+                    setAllCards((prevCards) =>
+                        prevCards.filter((card) => card.firebaseID !== docData.firebaseID)
+                    );
+                }
+
+
             });
-            setAllCards(dataArray);
-        }
-        getData();
+        });
+        return () => unsubscribe();
     }, []);
 
     const handleDeleteBlog = async (firebseID: string) => {
@@ -85,8 +110,9 @@ export default function ShowBlogsToAdmin() {
                             </div>
                         </div>
                     </div>
-                ))}
-            </div>
+                ))
+                }
+            </div >
         ) : (
             <div className="flex justify-center items-center h-[100vh]">
                 <CircularProgress color='success' />
