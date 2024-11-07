@@ -12,6 +12,12 @@ import ReactMarkdown from 'react-markdown';
 
 export default function Page({ params }: { params: { slug: string } }) {
     const [data, setData] = useState<BlogData | null>(null);
+    const [comment, setComment] = useState("");
+
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        setComment(e.target.value)
+    }
 
     useEffect(() => {
         if (params.slug) {
@@ -58,7 +64,18 @@ export default function Page({ params }: { params: { slug: string } }) {
                                     <div className="text-gray-700 leading-relaxed prose">
                                         <ReactMarkdown>
                                             {data.text}
-                                        </ReactMarkdown> </div>
+                                        </ReactMarkdown>
+                                    </div>
+                                    <div>
+                                        <textarea value={comment} onChange={handleInputChange} className='border border-1 mt-5' name="Comment" id="comment" cols={81} placeholder=' Comment...' rows={3} />
+
+                                        {comment.trim() !== "" && (
+                                            <button /* onClick={} */ className="bg-green-500 hover:bg-green-600 text-white w-full font-bold py-2 px-4 rounded transition-all delay-500">
+                                                Post
+                                            </button>
+                                        )
+                                        }
+                                    </div>
                                 </div>
                             </div>
                         </div>
