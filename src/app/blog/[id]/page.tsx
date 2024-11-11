@@ -5,6 +5,7 @@ import Header from '@/components/header';
 import { auth, db } from '@/firebase/firebseConfig';
 import { BlogData, Comment } from '@/type/type';
 import { CircularProgress } from '@mui/material';
+import { Save } from '@mui/icons-material';
 import { addDoc, collection, getDocs, onSnapshot, query, serverTimestamp, where } from 'firebase/firestore';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react'
@@ -75,6 +76,24 @@ export default function Page({ params }: { params: { id: string } }) {
         }
     };
 
+
+    const saveBlog = async () => {
+        const uid = auth.currentUser?.uid;
+        const createdAt = serverTimestamp();
+        if (!uid) {
+            toast.error("User is not authenticated!"); return;
+        }
+        const collectionRef = collection(db, "saveBlogs");
+        try {
+            const newBlogSave = { blogId: id, createdAt };
+            await addDoc(collectionRef, newBlogSave);
+            console.log("blog save");
+            
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
     useEffect(() => {
         if (id) {
             console.log("start");
@@ -86,6 +105,7 @@ export default function Page({ params }: { params: { id: string } }) {
                     querySnapshot.forEach((doc) => {
                         const docData = doc.data() as BlogData;
                         setData(docData);
+                        
                     })
                 } catch (e) {
                     console.log(e);
@@ -111,6 +131,9 @@ export default function Page({ params }: { params: { id: string } }) {
                                 />
                                 <div className="p-6">
                                     <h1 className="text-3xl font-bold mb-4">{data.title}</h1>
+                                    <div onClick={saveBlog} className='w-fit cursor-pointer'>
+                                        <Save />
+                                    </div>
                                     <p className="text-sm text-gray-500 mb-2">{formatDate(data)}</p>
                                     {data.tag && (
                                         <div className="mb-4">
