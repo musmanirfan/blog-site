@@ -5,7 +5,7 @@ import Header from '@/components/header';
 import { auth, db } from '@/firebase/firebseConfig';
 import { BlogData, Comment } from '@/type/type';
 import { CircularProgress } from '@mui/material';
-import { addDoc, collection, doc, getDocs, onSnapshot, query, serverTimestamp, updateDoc, where } from 'firebase/firestore';
+import { addDoc, collection, getDocs, onSnapshot, query, serverTimestamp, where } from 'firebase/firestore';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react'
 import ReactMarkdown from 'react-markdown';
@@ -92,7 +92,7 @@ export default function Page({ params }: { params: { id: string } }) {
                 }
             })()
         }
-    }, [])
+    }, [id])
     return (
         <>
             <Header />

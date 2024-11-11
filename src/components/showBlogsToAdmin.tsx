@@ -4,10 +4,9 @@ import { db } from '@/firebase/firebseConfig';
 import { CardData } from '@/type/type';
 import { Delete, Edit } from '@mui/icons-material';
 import { CircularProgress } from '@mui/material';
-import { collection, deleteDoc, doc, getDocs, onSnapshot, query } from 'firebase/firestore';
+import { collection, deleteDoc, doc, onSnapshot, query } from 'firebase/firestore';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
 import Markdown from 'react-markdown';
 import { toast } from 'react-toastify';
@@ -67,7 +66,7 @@ export default function ShowBlogsToAdmin() {
     return (
         allCards.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-6">
-                {allCards.map(({ firebaseID, imageUrl, title, text, tag, slug }) => (
+                {allCards.map(({ firebaseID, imageUrl, title, text, tagslug }) => (
                     <div key={firebaseID} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
                         <div className="relative w-full h-64">
                             <Image

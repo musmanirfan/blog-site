@@ -25,7 +25,7 @@ export default function ShowBlogs() {
     return (
         allCards.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-6">
-                {allCards.map(({ firebaseID, imageUrl, title, text, tag, slug }) => (
+                {allCards.map(({ firebaseID, imageUrl, title, text, tag }) => (
                     <div key={firebaseID} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
                         <div className="relative w-full h-64">
                             <Image
