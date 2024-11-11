@@ -5,6 +5,7 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from '@/firebase/firebseConfig';
 import { toast } from 'react-toastify';
 import { User } from '@/type/type';
+import { Save } from '@mui/icons-material';
 
 export default function Header() {
     const [reload, setReload] = useState(false);
@@ -12,12 +13,12 @@ export default function Header() {
     const route = useRouter();
     const path = usePathname();
 
-    useEffect(()=>{
+    useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser as User)
         })
         return () => unsubscribe();
-    },[])
+    }, [])
 
 
     const logoutFunc = () => {
@@ -46,11 +47,16 @@ export default function Header() {
                 <h1 className="text-2xl font-bold">My Website</h1>
 
                 {/* <!-- Add Blog and Logout Buttons --> */}
-                <div className="flex space-x-4">
+                <div className="flex space-x-4 flex-row">
                     {user && (
-                        <button onClick={() => { route.push("/add") }} className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
-                            Add Blog
-                        </button>
+                        <div className='flex flex-row gap-3'>
+                            <div onClick={() => route.push("/save")} className='w-fit flex justify-center items-center cursor-pointer'>
+                                <Save fontSize="large" />
+                            </div>
+                            <button onClick={() => { route.push("/add") }} className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 whitespace-nowrap rounded">
+                                Add Blog
+                            </button>
+                        </div>
                     )
                     }
                     {
