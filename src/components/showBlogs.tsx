@@ -49,7 +49,7 @@ export default function ShowBlogs() {
                                     {text!.length > 150 ? `${text!.substring(0, 150)}...` : text}
                                 </Markdown>
                             </div>
-                            <Link href={`/blog/${slug}`} className="inline-block mt-4 text-teal-600 hover:underline font-semibold  absolute bottom-4 left-4">
+                            <Link href={`/blog/${firebaseID}`} className="inline-block mt-4 text-teal-600 hover:underline font-semibold  absolute bottom-4 left-4">
                                 Read More
                             </Link>
                         </div>

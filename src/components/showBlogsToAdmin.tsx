@@ -95,7 +95,7 @@ export default function ShowBlogsToAdmin() {
                                 </Markdown>
                             </div>
                             <div className='flex justify-between items-center absolute bottom-4 left-4 right-4'>
-                                <Link href={`/blog/${slug}`} className="inline-block mt-4 text-teal-600 hover:underline font-semibold">
+                                <Link href={`/blog/${firebaseID}`} className="inline-block mt-4 text-teal-600 hover:underline font-semibold">
                                     Read More
                                 </Link>
                                 <div className='flex'>

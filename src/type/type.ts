@@ -43,3 +43,10 @@ export interface BlogData {
     // Add other fields as necessary
 }
 
+export interface Comment {
+    blogId: string;
+    uid: string;
+    createdAt: Timestamp; // or Date if you're converting it
+    comment: string;
+}
+
