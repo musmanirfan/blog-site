@@ -85,7 +85,7 @@ export default function Page({ params }: { params: { id: string } }) {
         }
         const collectionRef = collection(db, "saveBlogs");
         try {
-            const newBlogSave = { blogId: id, createdAt };
+            const newBlogSave = { blogId: id, createdAt, uid };
             await addDoc(collectionRef, newBlogSave);
             console.log("blog save");
             

@@ -34,6 +34,7 @@ export type CardData = {
 };
 
 export interface BlogData {
+    id?: string,
     imageUrl: string;
     title: string;
     slug: string;
