@@ -2,7 +2,7 @@
 
 import Header from '@/components/header';
 import { useAuthContext } from '@/context/authContext';
-import { auth, db } from '@/firebase/firebseConfig';
+import { db } from '@/firebase/firebseConfig';
 import { CardData } from '@/type/type';
 import { CircularProgress } from '@mui/material';
 import { collection, getDocs, onSnapshot, query, where } from 'firebase/firestore';
