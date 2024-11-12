@@ -5,11 +5,12 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from '@/firebase/firebseConfig';
 import { toast } from 'react-toastify';
 import { User } from '@/type/type';
-import { Save } from '@mui/icons-material';
+import { HdrStrongRounded, MoreVert } from '@mui/icons-material';
 
 export default function Header() {
     const [reload, setReload] = useState(false);
     const [user, setUser] = useState<User | null>(null)
+    const [showDropdown, setShowDropdown] = useState(false);
     const route = useRouter();
     const path = usePathname();
 
@@ -38,7 +39,9 @@ export default function Header() {
         });
     }
 
-
+    const toggleDropdown = () => {
+        setShowDropdown(!showDropdown);
+    };
 
     return (
         <header className="bg-gray-800 text-white p-4">
@@ -47,34 +50,38 @@ export default function Header() {
                 <h1 className="text-2xl font-bold">My Website</h1>
 
                 {/* <!-- Add Blog and Logout Buttons --> */}
-                <div className="flex space-x-4 flex-row">
-                    {user && (
-                        <div className='flex flex-row gap-3'>
-                            <div onClick={() => route.push("/save")} className='w-fit flex justify-center items-center cursor-pointer'>
-                                <Save fontSize="large" />
-                            </div>
-                            <button onClick={() => { route.push("/add") }} className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 whitespace-nowrap rounded">
-                                Add Blog
-                            </button>
-                        </div>
-                    )
-                    }
-                    {
-                        user ? (
-                            <button onClick={logoutFunc}
-                                className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
-                            >
-                                logOut
-                            </button>
-                        ) : (
-                            <button onClick={() => { route.push("/signup") }}
-                                className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
-                            >
-                                sign Up
-                            </button>
-                        )
-                    }
+                <div onClick={toggleDropdown} className='w-fit cursor-pointer  relative'>
+                    <HdrStrongRounded />
                 </div>
+                {showDropdown && (
+                    <div className="absolute right-0 top-16 bg-white border border-gray-200 rounded shadow-lg p-4 z-50 flex flex-col space-y-3">
+
+                        {user && (
+                            <div className='flex flex-col space-y-3'>
+                                <h1 className='w-full text-center cursor-pointer text-black underline' onClick={() => route.push("/save")}>Save Blogs</h1>
+                                <button onClick={() => { route.push("/add") }} className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 whitespace-nowrap rounded">
+                                    Add Blog
+                                </button>
+                            </div>
+                        )
+                        }
+                        {
+                            user ? (
+                                <button onClick={logoutFunc}
+                                    className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
+                                >
+                                    logOut
+                                </button>
+                            ) : (
+                                <button onClick={() => { route.push("/signup") }}
+                                    className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+                                >
+                                    sign Up
+                                </button>
+                            )
+                        }
+                    </div>
+                )}
             </div>
         </header >
     )
