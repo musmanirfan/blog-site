@@ -6,6 +6,7 @@ import ShowBlogs from "@/components/showBlogs";
 import { auth } from "@/firebase/firebseConfig";
 import { useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
+import Footer from "@/components/footer";
 
 
 export default function Home() {
@@ -29,6 +30,7 @@ export default function Home() {
     <div>
       <Header />
       <ShowBlogs />
+      <Footer />
     </div>
   );
 }

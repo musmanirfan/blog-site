@@ -76,7 +76,7 @@ export default function Header() {
                                 <button onClick={() => { route.push("/signup") }}
                                     className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
                                 >
-                                    sign Up
+                                    sign Up/ Sign In
                                 </button>
                             )
                         }

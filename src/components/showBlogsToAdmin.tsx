@@ -64,58 +64,71 @@ export default function ShowBlogsToAdmin() {
 
 
     return (
-        allCards.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-6">
-                {allCards.map(({ firebaseID, imageUrl, title, text, tag }) => (
-                    <div key={firebaseID} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
-                        <div className="relative w-full h-64">
-                            <Image
-                                className="object-cover w-full h-full"
-                                src={imageUrl!}
-                                alt={title!}
-                                width={800}
-                                height={400}
-                                unoptimized
-                            />
-                        </div>
-                        <div className="p-6 h-[300px] relative">
-                            <div className="text-teal-600 text-sm font-medium mb-2 border w-fit px-4 py-1 rounded-full border-teal-600">
-                                {tag}
+        <>
+            <section className="products">
+                <div className="pro-heading">
+                    <div className="content">
+                        <h2>AdminBLogs</h2>
+                        <h2>AdminBLogs</h2>
+                    </div>
+                </div>
+                <div className="product-list">
+                </div>
+            </section>
+
+            {allCards.length > 0 ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-6">
+                    {allCards.map(({ firebaseID, imageUrl, title, text, tag }) => (
+                        <div key={firebaseID} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                            <div className="relative w-full h-64">
+                                <Image
+                                    className="object-cover w-full h-full"
+                                    src={imageUrl!}
+                                    alt={title!}
+                                    width={800}
+                                    height={400}
+                                    unoptimized
+                                />
                             </div>
-                            <h2 className="text-2xl font-bold mb-4">
-                                {title}
-                            </h2>
-                            {/* <h2 className="text-2xl font-bold mb-4">
+                            <div className="p-6 h-[300px] relative">
+                                <div className="text-teal-600 text-sm font-medium mb-2 border w-fit px-4 py-1 rounded-full border-teal-600">
+                                    {tag}
+                                </div>
+                                <h2 className="text-2xl font-bold mb-4">
+                                    {title}
+                                </h2>
+                                {/* <h2 className="text-2xl font-bold mb-4">
                                 {firebaseID}
                             </h2> */}
-                            <div className="text-gray-700">
-                                <Markdown>
-                                    {text!.length > 150 ? `${text!.substring(0, 150)}...` : text}
-                                </Markdown>
-                            </div>
-                            <div className='flex justify-between items-center absolute bottom-4 left-4 right-4'>
-                                <Link href={`/blog/${firebaseID}`} className="inline-block mt-4 text-teal-600 hover:underline font-semibold">
-                                    Read More
-                                </Link>
-                                <div className='flex'>
-                                    <Link href={`admin/edit/${firebaseID}`}>
-                                        <Edit className='cursor-pointer' />
-                                    </Link>
-                                    <div className='cursor-pointer' onClick={() => { handleDeleteBlog(firebaseID as string) }}>
-                                        <Delete />
-                                    </div>
+                                <div className="text-gray-700">
+                                    <Markdown>
+                                        {text!.length > 150 ? `${text!.substring(0, 150)}...` : text}
+                                    </Markdown>
                                 </div>
+                                <div className='flex justify-between items-center absolute bottom-4 left-4 right-4'>
+                                    <Link href={`/blog/${firebaseID}`} className="inline-block mt-4 text-teal-600 hover:underline font-semibold">
+                                        Read More
+                                    </Link>
+                                    <div className='flex'>
+                                        <Link href={`admin/edit/${firebaseID}`}>
+                                            <Edit className='cursor-pointer' />
+                                        </Link>
+                                        <div className='cursor-pointer' onClick={() => { handleDeleteBlog(firebaseID as string) }}>
+                                            <Delete />
+                                        </div>
+                                    </div>
 
+                                </div>
                             </div>
                         </div>
-                    </div>
-                ))
-                }
-            </div >
-        ) : (
-            <div className="flex justify-center items-center h-[100vh]">
-                <CircularProgress color='success' />
-            </div>
-        )
+                    ))
+                    }
+                </div >
+            ) : (
+                <div className="flex justify-center items-center h-[100vh]">
+                    <CircularProgress color='success' />
+                </div>
+            )}
+        </>
     )
 }
