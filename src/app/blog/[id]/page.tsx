@@ -11,6 +11,7 @@ import Image from 'next/image';
 import React, { useEffect, useState } from 'react'
 import ReactMarkdown from 'react-markdown';
 import { toast } from 'react-toastify';
+import Footer from '@/components/footer';
 
 export default function Page({ params }: { params: { id: string } }) {
     const [data, setData] = useState<BlogData | null>(null);
@@ -88,7 +89,7 @@ export default function Page({ params }: { params: { id: string } }) {
             const newBlogSave = { blogId: id, createdAt, uid };
             await addDoc(collectionRef, newBlogSave);
             console.log("blog save");
-            
+
         } catch (e) {
             console.log(e);
         }
@@ -105,7 +106,7 @@ export default function Page({ params }: { params: { id: string } }) {
                     querySnapshot.forEach((doc) => {
                         const docData = doc.data() as BlogData;
                         setData(docData);
-                        
+
                     })
                 } catch (e) {
                     console.log(e);
@@ -190,6 +191,7 @@ export default function Page({ params }: { params: { id: string } }) {
                     )
                 }
             </div>
+            <Footer />
         </>
     )
 }

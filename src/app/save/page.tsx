@@ -1,5 +1,6 @@
 "use client"
 
+import Footer from '@/components/footer';
 import Header from '@/components/header';
 import { useAuthContext } from '@/context/authContext';
 import { db } from '@/firebase/firebseConfig';
@@ -70,6 +71,16 @@ export default function Save() {
     <>
 
       <Header />
+      <section className="products">
+        <div className="pro-heading">
+          <div className="content">
+            <h2>SaveBLogs</h2>
+            <h2>SaveBLogs</h2>
+          </div>
+        </div>
+        <div className="product-list">
+        </div>
+      </section>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-6">
         {savedBlogs.map(({ firebaseID, imageUrl, title, text, tag }) => (
           <div key={firebaseID} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
@@ -102,6 +113,7 @@ export default function Save() {
           </div>
         ))}
       </div>
+      <Footer />
     </>
   )
 }
