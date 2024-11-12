@@ -47,7 +47,7 @@ export default function Header() {
         <header className="bg-gray-800 text-white p-4">
             <div className="container mx-auto flex justify-between items-center">
                 {/* <!-- Website Name --> */}
-                <h1 className="text-2xl font-bold">My Website</h1>
+                <h1 className="text-2xl font-bold cursor-pointer" onClick={() => { route.push("/") }}>My Website</h1>
 
                 {/* <!-- Add Blog and Logout Buttons --> */}
                 <div onClick={toggleDropdown} className='w-fit cursor-pointer  relative'>

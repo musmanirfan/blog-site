@@ -117,13 +117,13 @@ export default function Page({ params }: { params: { id: string } }) {
     return (
         <>
             <Header />
-            <div className='flex w-[100%] justify-center mx-auto'>
+            <div className='flex justify-center'>
                 {
                     data ? (
-                        <div className="max-w-screen-md mx-auto p-6">
-                            <div className="bg-white shadow-lg rounded-lg overflow-hidden">
+                        <div className=" !w-[700px] overflow-x-hidden">
+                            <div className="bg-white shadow-lg rounded-lg !w-[100%] overflow-x-hidden">
                                 <Image
-                                    className="object-cover w-full h-64"
+                                    className="object-cover w-[100%] sm:w-full h-64"
                                     src={data.imageUrl!}
                                     alt={data.title!}
                                     width={800}
@@ -149,7 +149,7 @@ export default function Page({ params }: { params: { id: string } }) {
                                         </ReactMarkdown>
                                     </div>
                                     <div>
-                                        <textarea value={comment} onChange={handleInputChange} className='border border-1 mt-5' name="Comment" id="comment" cols={81} placeholder=' Comment...' rows={3} />
+                                        <textarea value={comment} onChange={handleInputChange} className='border border-1 mt-5 sm:w-[1200px] !pr-2 ' name="Comment" id="comment" placeholder=' Comment...' cols={80} rows={3} />
 
                                         {comment.trim() !== "" && (
                                             <button onClick={addComment} className="bg-green-500 hover:bg-green-600 text-white w-full font-bold py-2 px-4 rounded transition-all delay-500">
