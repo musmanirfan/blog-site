@@ -5,7 +5,7 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from '@/firebase/firebseConfig';
 import { toast } from 'react-toastify';
 import { User } from '@/type/type';
-import { HdrStrongRounded, MoreVert } from '@mui/icons-material';
+import { HdrStrongRounded } from '@mui/icons-material';
 
 export default function Header() {
     const [reload, setReload] = useState(false);
