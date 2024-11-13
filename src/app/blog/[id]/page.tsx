@@ -89,6 +89,7 @@ export default function Page({ params }: { params: { id: string } }) {
             const newBlogSave = { blogId: id, createdAt, uid };
             await addDoc(collectionRef, newBlogSave);
             console.log("blog save");
+            toast.success('Blog Save successfully!');
 
         } catch (e) {
             console.log(e);
