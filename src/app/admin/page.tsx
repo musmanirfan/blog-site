@@ -1,3 +1,4 @@
+import Footer from "@/components/footer";
 import Header from "@/components/header";
 import ShowBlogsToAdmin from "@/components/showBlogsToAdmin";
 
@@ -7,6 +8,7 @@ export default function Page() {
         <>
             <Header />
             <ShowBlogsToAdmin />
+            <Footer />
         </>
     )
 }
