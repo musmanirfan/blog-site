@@ -5,7 +5,7 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from '@/firebase/firebseConfig';
 import { toast } from 'react-toastify';
 import { User } from '@/type/type';
-import { HdrStrongRounded } from '@mui/icons-material';
+import { HdrStrongRounded, MoreHoriz } from '@mui/icons-material';
 
 export default function Header() {
     const [reload, setReload] = useState(false);
@@ -51,7 +51,7 @@ export default function Header() {
 
                 {/* <!-- Add Blog and Logout Buttons --> */}
                 <div onClick={toggleDropdown} className='w-fit cursor-pointer  relative'>
-                    <HdrStrongRounded />
+                    <MoreHoriz />
                 </div>
                 {showDropdown && (
                     <div className="absolute right-0 top-16 bg-white border border-gray-200 rounded shadow-lg p-4 z-50 flex flex-col space-y-3">
